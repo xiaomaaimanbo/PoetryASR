@@ -1,0 +1,41 @@
+model:
+  name: "medium"
+  language: "zh"
+  task: "transcribe"
+  device: "cuda"
+
+# 实时识别专用配置（更小的模型 = 更低延迟）
+realtime:
+  model_name: "base"
+  language: "zh"
+  device: "cuda"
+
+training:
+  epochs: 10
+  batch_size: 8
+  learning_rate: 1e-5
+  warmup_steps: 1000
+  weight_decay: 1e-6
+
+data:
+  train_dir: "data/train"
+  test_dir: "data/test"
+  sample_rate: 16000
+  max_duration: 30
+
+logging:
+  log_dir: "logs"
+  log_level: "INFO"
+
+output:
+  model_dir: "models"
+  result_dir: "results"
+
+# 古诗词识别配置
+poetry:
+  # 是否自动检测诗词（无需 --correct 参数）
+  auto_detect: true
+  # 诗词配置文件目录
+  directory: "data/poetry"
+  # 匹配相似度阈值（低于此值不认为是诗词）
+  similarity_threshold: 0.3

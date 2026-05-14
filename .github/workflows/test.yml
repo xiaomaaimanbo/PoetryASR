@@ -1,0 +1,56 @@
+name: Test & Lint
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: Run unit tests with coverage
+        run: |
+          pip install pytest pytest-cov
+          pytest tests/ -v --cov=src --cov-report=term-missing
+
+      - name: Verify module imports
+        run: |
+          python -c "from src.audio_processor import AudioProcessor; print('ok')"
+          python -c "from src.poetry_corrector import PoetryCorrector; print('ok')"
+          python -c "from src.mimo_client import MimoClient; print('ok')"
+
+  webui-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Verify webui.py syntax
+        run: python -m py_compile speech_recognition/webui.py
