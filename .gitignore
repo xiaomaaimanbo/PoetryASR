@@ -22,5 +22,5 @@ PoetryASR.spec
 !安装.bat
 !cli.bat
 
-data/train/
+data/train/data_thchs30.tgz
 data/test/%(title)s.%(ext)s.mp3
