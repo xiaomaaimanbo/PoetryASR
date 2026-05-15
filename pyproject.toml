@@ -17,6 +17,8 @@ classifiers = [
     "Intended Audience :: Education",
     "License :: OSI Approved :: MIT License",
     "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -30,6 +32,8 @@ dependencies = [
     "openai-whisper>=20231117",
     "librosa>=0.10.0",
     "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "pandas>=2.0.0",
     "soundfile>=0.12.0",
     "pyyaml>=6.0",
     "pypinyin>=0.49.0",
@@ -47,8 +51,8 @@ all = ["poetry-asr[dev,mimo,realtime]"]
 poetry-asr = "launcher:main"
 
 [project.urls]
-Homepage = "https://github.com/yourname/poetry-asr"
-Issues = "https://github.com/yourname/poetry-asr/issues"
+Homepage = "https://github.com/xiaomaaimanbo/PoetryASR"
+Issues = "https://github.com/xiaomaaimanbo/PoetryASR/issues"
 
 [tool.setuptools.packages.find]
 include = ["src*", "launcher*", "app*"]
