@@ -54,8 +54,11 @@ poetry-asr = "launcher:main"
 Homepage = "https://github.com/xiaomaaimanbo/PoetryASR"
 Issues = "https://github.com/xiaomaaimanbo/PoetryASR/issues"
 
+[tool.setuptools]
+py-modules = ["launcher", "app", "webui", "main"]
+
 [tool.setuptools.packages.find]
-include = ["src*", "launcher*", "app*"]
+include = ["src*", "tests*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

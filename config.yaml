@@ -2,14 +2,13 @@ model:
   name: "medium"
   language: "zh"
   task: "transcribe"
-  device: "cuda"
+  device: "auto"
 
 # 实时识别专用配置（更小的模型 = 更低延迟）
 realtime:
   model_name: "base"
   language: "zh"
-  device: "cuda"
-
+  device: "auto"
 training:
   epochs: 10
   batch_size: 8
